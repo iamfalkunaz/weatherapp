@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Image2 from "./snowman.svg";
 
 const url = `https://api.openweathermap.org/data/2.5/weather?`;
 const apikey = "bbff2fd81a95f0cc44090592f19cd1d3";
@@ -131,6 +132,7 @@ function Header() {
                 Search
               </button>
             </div>
+           {/* <img src={Image2} alt="snowman" className="centered-snowman"/> */}
             {isLoading && (
               <div className="text-center">
                 <div className="spinner-border text-light" role="status">
@@ -153,6 +155,7 @@ function Header() {
               </div>
             ) : null}
           </div>
+          
         </section>
       </div>
     </>
