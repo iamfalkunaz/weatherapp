@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Image2 from "./snowman.svg";
+import Footer from "./shared/Footer";
 
 const url = `https://api.openweathermap.org/data/2.5/weather?`;
 const apikey = "bbff2fd81a95f0cc44090592f19cd1d3";
@@ -110,10 +110,10 @@ function Header() {
           </div>
         </nav>
 
-        <section className="header-section">
+        <section className="header-section text-white">
           <div className="center-div">
-            <h1 className="fw-bold main-heading">Find Weather Forcast</h1>
-            <div className="input-group mb-3">
+            <h1 className="fw-bold main-heading ">Find Weather Forcast</h1>
+            <div className="input-group mb-3 ">
               <input
                 type="text"
                 value={city}
@@ -132,7 +132,7 @@ function Header() {
                 Search
               </button>
             </div>
-           {/* <img src={Image2} alt="snowman" className="centered-snowman"/> */}
+            {/* <img src={Image2} alt="snowman" className="centered-snowman"/> */}
             {isLoading && (
               <div className="text-center">
                 <div className="spinner-border text-light" role="status">
@@ -155,8 +155,8 @@ function Header() {
               </div>
             ) : null}
           </div>
-          
         </section>
+       <Footer/>
       </div>
     </>
   );

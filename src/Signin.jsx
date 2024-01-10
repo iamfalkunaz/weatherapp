@@ -1,6 +1,11 @@
 import React from "react";
 import Image1 from "./undraw_remotely_2j6y.svg";
 import { Link } from "react-router-dom";
+import Button from "./shared/Button";
+import Heading from "./shared/Heading";
+import Checkbox from "./shared/Checkbox";
+import Socialicons from "./shared/Socialicons";
+import InputFeilds from "./shared/InputFeilds";
 
 function Sginin() {
   return (
@@ -9,58 +14,30 @@ function Sginin() {
         <div className="col-lg-6 col-sm-4 image-side">
           <img src={Image1} alt="remotly work.svg img" />
         </div>
-
         <div className="col-lg-6 col-sm-8 form-side d-flex align-items-center">
           <div className="login-form w-100">
-            <h2>Sign In</h2>
-            <p>
-              Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur
-              adipisicing.
-            </p>
+            <Heading data="Sign In" />
+            <p>Please SignUp to see weather details.Access the latest forecasts.</p>
+
             <form action="login" method="post">
               <div className="input-area">
                 <div className="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Username"
-                    required
-                    autofocus
-                  />
+                  <InputFeilds data="Name" />
                 </div>
                 <div className="form-group">
-                  <input
-                    type="password"
-                    class="form-control "
-                    placeholder="Password "
-                    required
-                    autofocus
-                  />
+                  <InputFeilds data="Password" />
                 </div>
               </div>
 
               <div className="form-group checkbox-area d-flex justify-content-between align-items-center">
-                <div className="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    className="custom-control-input"
-                    id="remember-me"
-                  />
-                  <label className="custom-control-label" for="remember-me">
-                    Remember me
-                  </label>
-                </div>
+                <Checkbox data="Remember me" />
               </div>
-              <button type="submit" className="btn btn-primary btn-block">
-                LogIn
-              </button>
+              <Button data="signin" />
             </form>
-            <p class="text-muted  my-3">– You don't have an account ? <Link to="/Signup">SignUp</Link>. –</p>
-            <div class="social-icons ">
-              <a href="#" class="fa fa-facebook-f"></a>
-              <a href="#" class="fa fa-twitter"></a>
-              <a href="#" class="fa fa-google"></a>
-            </div>
+            <p class="text-muted  my-3">
+              – You don't have an account ? <Link to="/Signup">SignUp</Link>. –
+            </p>
+            <Socialicons />
           </div>
         </div>
       </div>
