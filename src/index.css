@@ -201,21 +201,7 @@ input:focus{
   display: block;
   width: 100%;
 }
-a:link {
-  text-decoration: none;
-}
 
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-a:active {
-  text-decoration: underline;
-}
 .social-icons a{
   display: inline-block;
   width: 3rem;
@@ -286,10 +272,22 @@ a:active {
   margin-right: .5rem;
   color: white;
 }
+.footer-social-icon a:link{
+  text-decoration: none;
+}
 .footer-social-icon .fa-facebook-f{background-color: #3b5998;}
 .footer-social-icon .fa-twitter {background-color: #1da1f2;}
 .footer-social-icon .fa-google {background-color: #db4437;}
 
+@media (max-width: 992px) {
+  .image-side {
+    
+  }
+  .form-side {
+    
+}
+
+}
 
 @media (max-width:768px) {
   .authentication-container{
@@ -311,11 +309,7 @@ a:active {
     text-align: center !important;
     padding-left: 15px;
     padding-right: 15px;
-  }
-  .footer{
-    width: 100%;
-    padding: 0%;
-    margin: 0%;
+    
   }
 }
 
