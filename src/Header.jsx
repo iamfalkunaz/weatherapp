@@ -110,7 +110,7 @@ function Header() {
           </div>
         </nav>
 
-        <section className="header-section text-white">
+        <section className="header-section text-white py-5">
           <div className="center-div">
             <h1 className="fw-bold main-heading ">Find Weather Forcast</h1>
             <div className="input-group mb-3 ">
