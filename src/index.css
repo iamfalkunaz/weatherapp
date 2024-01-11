@@ -9,6 +9,10 @@ body, html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+.toast-header{
+  color: #fff;
+  background-color: rgb(134, 55, 177);
+}
 .header {
   background-image: url('./weatherbg.png');
   background-size: cover;
@@ -267,7 +271,7 @@ input:focus{
   height: 1.5rem;
   line-height: 1.5rem;
   border-radius: 50%;
-  background-color: #ddd;
+  /*background-color: #ddd;*/
   text-align: center;
   margin-right: .5rem;
   color: white;
@@ -275,16 +279,25 @@ input:focus{
 .footer-social-icon a:link{
   text-decoration: none;
 }
-.footer-social-icon .fa-facebook-f{background-color: #3b5998;}
+.footer-social-icon .fa-twitter:hover {
+  color: rgb(112, 109, 114); 
+}
+.footer-social-icon .fa-google:hover {
+  color: rgb(112, 109, 114); 
+}
+.footer-social-icon .fa-facebook-f:hover {
+  color:  rgb(112, 109, 114); 
+}
+/*.footer-social-icon .fa-facebook-f{background-color: #3b5998;}
 .footer-social-icon .fa-twitter {background-color: #1da1f2;}
-.footer-social-icon .fa-google {background-color: #db4437;}
+.footer-social-icon .fa-google {background-color: #db4437;}*/
 
 @media (max-width: 992px) {
   .image-side {
-    
+    width: auto;
   }
   .form-side {
-    
+    padding: 0%;
 }
 
 }

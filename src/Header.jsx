@@ -15,11 +15,21 @@ export const getWeatherData = async (city) => {
   }
 };
 
+
+
 function Header() {
   const [weatherdata, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
+
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      fetchData();
+    }
+  };
+  
 
   const fetchData = async () => {
     if (city.trim() === "") {
@@ -118,6 +128,7 @@ function Header() {
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
+                onKeyPress={handleKeyPress} // Added event handler for Enter key
                 className="form-control inputstyle"
                 placeholder="Enter your city name"
                 disabled={isLoading} // Disable input when loading
