@@ -81,6 +81,15 @@ p {
   font-size: 30px;
   color: white;
 }
+.icon{
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.icon:hover {
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(0.5);
+  opacity: 0;
+}
 .header-section {
   text-align: center;
   padding-top: 40px; 
@@ -123,13 +132,6 @@ input {
   padding: 10px 0 20px 0;
   color: white;
 }
-/*.centered-snowman {
-  height: 100px;
-  width: 100px;
-  display: block;
-  margin: 0 auto;
-}*/
-
 
 /* Signin Signup styling start*/
 
@@ -271,7 +273,6 @@ input:focus{
   height: 1.5rem;
   line-height: 1.5rem;
   border-radius: 50%;
-  /*background-color: #ddd;*/
   text-align: center;
   margin-right: .5rem;
   color: white;
@@ -288,9 +289,7 @@ input:focus{
 .footer-social-icon .fa-facebook-f:hover {
   color:  rgb(112, 109, 114); 
 }
-/*.footer-social-icon .fa-facebook-f{background-color: #3b5998;}
-.footer-social-icon .fa-twitter {background-color: #1da1f2;}
-.footer-social-icon .fa-google {background-color: #db4437;}*/
+
 
 @media (max-width: 992px) {
   .image-side {
