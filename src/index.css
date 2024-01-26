@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
 }
@@ -9,12 +10,12 @@ body, html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-.toast-header{
+.toast-header {
   color: #fff;
   background-color: rgb(134, 55, 177);
 }
 .header {
-  background-image: url('./weatherbg.png');
+  background-image: url("./weatherbg.png");
   background-size: cover;
   height: 100vh;
   background-position: center;
@@ -35,7 +36,7 @@ p {
 .navbar {
   background: transparent;
 }
-.navbar-toggler{
+.navbar-toggler {
   background-color: #fff;
 }
 .navbar .navbar-nav .nav-link {
@@ -60,7 +61,7 @@ p {
   height: 4px;
   transition: all 0.5s;
 }
-.navbar-nav  .nav-item{
+.navbar-nav .nav-item {
   margin-right: 40px;
 }
 .navbar .navbar-nav .nav-item:hover::after {
@@ -81,7 +82,7 @@ p {
   font-size: 30px;
   color: white;
 }
-.icon{
+.icon {
   transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -92,11 +93,11 @@ p {
 }
 .header-section {
   text-align: center;
-  padding-top: 40px; 
+  padding-top: 40px;
 }
 .main-heading {
-  color: white; 
-  margin-bottom: 20px; 
+  color: white;
+  margin-bottom: 20px;
 }
 .input-group {
   justify-content: center;
@@ -134,30 +135,30 @@ input {
 }
 
 /* Signin Signup styling start*/
-.authentication-container{
+.authentication-container {
   display: flex;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
 }
-.authentication-row{
+.authentication-row {
   margin: 0;
-  width: 80%; 
+  width: 80%;
   max-width: 1200px;
 }
 
 .image-side img {
-    width: 100%; 
-    height: auto; 
-    max-height: 100%;
-    margin-top: 35px;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  margin-top: 35px;
 }
 .form-side {
   padding: 2rem;
   display: flex;
   align-items: center;
 }
-.input-area{
+.input-area {
   background-color: #edf2f5;
   border-radius: 5px;
 }
@@ -165,47 +166,47 @@ input {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
-  height: auto; 
-  width: 100%; 
+  justify-content: space-between;
+  height: auto;
+  width: 100%;
 }
-input:focus{
+input:focus {
   outline: none !important;
-  box-shadow:none !important ;
+  box-shadow: none !important ;
 }
-.login-form h2{
+.login-form h2 {
   font-size: 2rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
-.login-form p{
+.login-form p {
   color: #6c757d;
   margin-bottom: 1.5rem;
 }
 
-.form-group{
+.form-group {
   margin-bottom: 1.5rem;
 }
-.form-control{
-  background-color:#edf2f5 !important;
+.form-control {
+  background-color: #edf2f5 !important;
   border: none;
   height: 3rem;
 }
-.custom-control-input{
+.custom-control-input {
   margin-right: 5px;
 }
 
 .custom-control-label::before,
 .custom-control-label::after {
-  top: .8rem; 
+  top: 0.8rem;
 }
-.btn-primary{
+.btn-primary {
   background-color: #007bff;
   border: none;
   height: 3rem;
   display: block;
   width: 100%;
 }
-.btn-secondary{
+.btn-secondary {
   background-color: #edf2f5 !important;
   border: none;
   height: 3rem;
@@ -213,7 +214,7 @@ input:focus{
   width: 100%;
   color: #007bff !important;
 }
-.social-icons a{
+.social-icons a {
   display: inline-block;
   width: 3rem;
   height: 3rem;
@@ -221,79 +222,88 @@ input:focus{
   border-radius: 50%;
   background-color: #ddd;
   text-align: center;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   color: white;
   text-decoration: none;
 }
-.social-icons .fa-facebook-f{background-color: #3b5998;}
-.social-icons .fa-twitter {background-color: #1da1f2;}
-.social-icons .fa-google {background-color: #db4437;}
+.social-icons .fa-facebook-f {
+  background-color: #3b5998;
+}
+.social-icons .fa-twitter {
+  background-color: #1da1f2;
+}
+.social-icons .fa-google {
+  background-color: #db4437;
+}
 
 .footer {
   position: absolute;
   bottom: 5px;
   width: 100%;
-  text-align: center; 
-  padding: 10px; 
+  text-align: center;
+  padding: 10px;
   color: white;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-heading {
   color: #ddd !important;
-  margin: auto; 
-
+  margin: auto;
 }
 
 .footer-content {
-  display: flex;       
-  align-items: center; 
-  justify-content: space-around; 
-  width: 100%;}
-
-.footer-icon, .footer-social-icon {
   display: flex;
-  align-items: center; 
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.footer-icon,
+.footer-social-icon {
+  display: flex;
+  align-items: center;
 }
 .footer-icon i.fa-temperature-half {
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .footer-heading p {
-  margin-left: 10px; 
+  margin-left: 10px;
   color: #ddd !important;
 }
-.footer-icon, .footer-heading, .footer-social-icon {
+.footer-icon,
+.footer-heading,
+.footer-social-icon {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 .footer-icon {
   font-size: 30px;
-  margin-right: 20px; 
+  margin-right: 20px;
 }
-.footer-social-icon a{
+.footer-social-icon a {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
   line-height: 1.5rem;
   border-radius: 50%;
   text-align: center;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   color: white;
 }
-.footer-social-icon a:link{
+.footer-social-icon a:link {
   text-decoration: none;
 }
 .footer-social-icon .fa-twitter:hover {
-  color: rgb(112, 109, 114); 
+  color: rgb(112, 109, 114);
 }
 .footer-social-icon .fa-google:hover {
-  color: rgb(112, 109, 114); 
+  color: rgb(112, 109, 114);
 }
 .footer-social-icon .fa-facebook-f:hover {
-  color:  rgb(112, 109, 114); 
+  color: rgb(112, 109, 114);
 }
 
 
@@ -303,32 +313,28 @@ input:focus{
   }
   .form-side {
     padding: 0%;
+  }
 }
 
-}
-
-@media (max-width:768px) {
-  .authentication-container{
+@media (max-width: 768px) {
+  .authentication-container {
     width: 100%;
   }
   .content {
     display: block;
     padding: 20px;
   }
-  .form-side{
+  .form-side {
     width: 100%;
     margin: 0 0 0 0;
     padding: 0 0 0 0;
   }
-  .center-div{
+  .center-div {
     width: 100%;
   }
-  .input-group{
+  .input-group {
     text-align: center !important;
     padding-left: 15px;
     padding-right: 15px;
-    
   }
 }
-
-

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Footer from "./shared/Footer";
 
@@ -21,7 +22,7 @@ function Header() {
   const [weatherdata, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  //const [showToast, setShowToast] = useState(false);
 
 
   const handleKeyPress = (event) => {
@@ -33,7 +34,8 @@ function Header() {
 
   const fetchData = async () => {
     if (city.trim() === "") {
-      setShowToast(true); // Show toast if city input is empty
+      //setShowToast(true); // Show toast if city input is empty
+      toast.error("Empty Input field");
       return;
     }
     setIsLoading(true);
@@ -42,45 +44,22 @@ function Header() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
       );
       setWeatherData(response.data);
-      setShowToast(false);
+        toast.success("Got the data")
     } catch (error) {
       console.error("Error fetching weather data:", error);
-      setShowToast(true);
+      toast.error("please write correct city name.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Function to hide the toast
-  const hideToast = () => {
-    setShowToast(false);
-  };
+ 
   return (
     <>
-      <div aria-live="polite" aria-atomic="true" className="position-relative">
-        <div className="toast-container position-absolute top-0 end-0 p-3">
-          <div
-            className={`toast ${showToast ? "show" : ""}`}
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header">
-              <strong className="me-auto">WeatherApp</strong>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="toast"
-                aria-label="Close"
-                onClick={hideToast}
-              ></button>
-            </div>
-            <div className="toast-body">
-              Incorrect input. Please enter a valid city name.
-            </div>
-          </div>
-        </div>
+      <div>
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
+
       <div className="header">
         <nav className="navbar navbar-expand-lg">
           <div className="container">

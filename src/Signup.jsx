@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import Image1 from "./undraw_remotely_2j6y.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./shared/Button";
@@ -11,7 +12,6 @@ import Socialicons from "./shared/Socialicons";
 function Signup() {
   const [checked, setChecked] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -27,16 +27,13 @@ function Signup() {
       ...data,
       [e.target.name]: value,
     });
-    if (
-      e.target.value.length === 3
-    ) {
-      setError("");
-    }
+   // if (e.target.value.length === 3) {
+   //}   setError("");
   };
 
   const handleSubmit = async (e) => {
     if (data.name === "" || data.email === "" || data.password === "") {
-      setError("All fields required");
+      toast.error("All fields required");
       return;
     }
 
@@ -49,55 +46,34 @@ function Signup() {
 
     try {
       const data = await axios.post(
-        "http://localhost:2022/user/signup",
+        "https://server-phi-two.vercel.app/user/signup",
         userData
       );
       setShowToast(true);
       setChecked(!checked);
       console.log("user created successfully", data);
       navigate("/signin");
-
+      
       if (data) {
         setData({
           name: (data.name = ""),
           email: (data.email = ""),
           password: (data.password = ""),
         });
+        toast.success("Signup successfully.");
+
       }
     } catch (error) {
       console.log("something wrong!", error);
+      toast.error("something wrong.");
     }
   };
-
-  //toast remove after 10 seconds
-
-  setTimeout(() => {
-    setShowToast(false);
-  }, 10000);
+  
 
   return (
     <>
-      <div
-        className="position-relative"
-        aria-live="polite"
-        aria-atomic="true"
-        animation="true"
-        autohide="true"
-        data-bs-delay="10000"
-      >
-        <div className="toast-container position-absolute top-0 end-0 p-3">
-          <div
-            className={`toast ${showToast ? "show" : ""}`}
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            <div className="toast-header">
-              <strong className="me-auto">WeatherApp</strong>
-            </div>
-            <div className="toast-body">Signup successfully.</div>
-          </div>
-        </div>
+      <div>
+        <Toaster position="top-center" reverseOrder={false} />
       </div>
 
       <div className="container-fluid authentication-container">
@@ -150,7 +126,7 @@ function Signup() {
                     onClick={() => setChecked(!checked)}
                   />
                 </div>
-                
+
                 <Button
                   signUpbtn={checked ? "btn-primary" : "btn-secondary"}
                   disabled={checked === false}
