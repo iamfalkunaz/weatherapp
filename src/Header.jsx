@@ -143,7 +143,6 @@ function Header() {
                 Search
               </button>
             </div>
-            {/* <img src={Image2} alt="snowman" className="centered-snowman"/> */}
             {isLoading && (
               <div className="text-center">
                 <div className="spinner-border text-light" role="status">

@@ -1,12 +1,14 @@
 import React from "react";
 
-function InputFeilds({data}) {
+function InputFeilds({data, onChange, name, value}) {
   return (
     <input
       type="text"
       class="form-control"
       placeholder={data}
-      required
+      onChange={onChange}
+      name={name}
+      value={value}
       autofocus
     />
   );
