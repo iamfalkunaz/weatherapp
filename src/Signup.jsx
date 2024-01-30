@@ -48,8 +48,7 @@ function Signup() {
 
     try {
       const data = await axios.post(
-        // "https://server-phi-two.vercel.app/user/signup",
-        "http://localhost:2022/user/signup",
+        "https://server-phi-two.vercel.app/user/signup",
         userData
       );
 
