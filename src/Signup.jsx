@@ -11,7 +11,7 @@ import Socialicons from "./shared/Socialicons";
 
 function Signup() {
   const [checked, setChecked] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -27,8 +27,8 @@ function Signup() {
       ...data,
       [e.target.name]: value,
     });
-   // if (e.target.value.length === 3) {
-   //}   setError("");
+    // if (e.target.value.length === 3) {
+    //} setError("");
   };
 
   const handleSubmit = async (e) => {
@@ -38,6 +38,8 @@ function Signup() {
     }
 
     e.preventDefault();
+    setIsLoading(true);
+
     const userData = {
       name: data.name,
       email: data.email,
@@ -49,11 +51,11 @@ function Signup() {
         "https://server-phi-two.vercel.app/user/signup",
         userData
       );
-      setShowToast(true);
+
       setChecked(!checked);
       console.log("user created successfully", data);
       navigate("/signin");
-      
+
       if (data) {
         setData({
           name: (data.name = ""),
@@ -61,14 +63,14 @@ function Signup() {
           password: (data.password = ""),
         });
         toast.success("Signup successfully.");
-
       }
     } catch (error) {
       console.log("something wrong!", error);
       toast.error("something wrong.");
+    } finally {
+      setIsLoading(false);
     }
   };
-  
 
   return (
     <>
@@ -129,8 +131,15 @@ function Signup() {
 
                 <Button
                   signUpbtn={checked ? "btn-primary" : "btn-secondary"}
-                  disabled={checked === false}
-                  data="Signup"
+                  disabled={checked === false || isLoading}
+                  data={
+                    isLoading ? (
+                      
+                      "loading..."
+                    ) : (
+                      "Signup"
+                    )
+                  }
                   onClick={handleSubmit}
                 />
               </div>

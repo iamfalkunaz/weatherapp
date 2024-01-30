@@ -305,7 +305,10 @@ input:focus {
 .footer-social-icon .fa-facebook-f:hover {
   color: rgb(112, 109, 114);
 }
-
+.logout{
+  color: white !important;
+  font-weight: bold;
+}
 
 @media (max-width: 992px) {
   .image-side {
