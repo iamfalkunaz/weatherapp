@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "./shared/Footer";
+import LogoutModal from "./shared/LogoutModal";
 
 const url = `https://api.openweathermap.org/data/2.5/weather?`;
 const apikey = "bbff2fd81a95f0cc44090592f19cd1d3";
@@ -16,25 +18,21 @@ export const getWeatherData = async (city) => {
   }
 };
 
-
-
 function Header() {
   const [weatherdata, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  //const [showToast, setShowToast] = useState(false);
-
+  const navigate = useNavigate();
+  let token;
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       fetchData();
     }
   };
   
-
   const fetchData = async () => {
     if (city.trim() === "") {
-      //setShowToast(true); // Show toast if city input is empty
       toast.error("Empty Input field");
       return;
     }
@@ -44,7 +42,7 @@ function Header() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
       );
       setWeatherData(response.data);
-        toast.success("Got the data")
+      toast.success("Got the data");
     } catch (error) {
       console.error("Error fetching weather data:", error);
       toast.error("please write correct city name.");
@@ -53,7 +51,7 @@ function Header() {
     }
   };
 
- 
+  token = localStorage.getItem("token");
   return (
     <>
       <div>
@@ -64,7 +62,7 @@ function Header() {
         <nav className="navbar navbar-expand-lg">
           <div className="container">
             <a className="navbar-brand text-white" href="#">
-              <i class="fa-solid fa-cloud-moon icon"></i>
+              <i className="fa-solid fa-cloud-moon icon"></i>
             </a>
             <button
               className="navbar-toggler"
@@ -84,16 +82,29 @@ function Header() {
                     Weather
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/signin">
-                    SignIn
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/Signup">
-                    SignUp
-                  </Link>
-                </li>
+                {token ? (
+                  <li className="nav-item">
+                    <div className="nav-link logout" >
+                    <LogoutModal
+                      //onClick={handleLogout} 
+                    />
+                    </div>
+                    
+                  </li>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/signin">
+                        SignIn
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/Signup">
+                        SignUp
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
@@ -145,7 +156,7 @@ function Header() {
             ) : null}
           </div>
         </section>
-       <Footer/>
+        <Footer />
       </div>
     </>
   );

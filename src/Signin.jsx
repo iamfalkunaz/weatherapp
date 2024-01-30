@@ -12,6 +12,7 @@ import InputFeilds from "./shared/InputFeilds";
 
 function Sginin() {
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -21,14 +22,13 @@ function Sginin() {
   });
 
   const handleChange = (e) => {
-  
     const value = e.target.value;
     setData({
       ...data,
       [e.target.name]: value,
     });
   };
-
+ 
   const handleSubmit = async (e) => {
     if (data.email === "" || data.password === "") {
       toast.error("All firlds are required");
@@ -36,6 +36,7 @@ function Sginin() {
     }
 
     e.preventDefault();
+    setIsLoading(true);
     const userData = {
       email: data.email,
       password: data.password,
@@ -43,13 +44,14 @@ function Sginin() {
 
     try {
       const data = await axios.post(
-        "https://server-phi-two.vercel.app/user/signin",
+        //"https://server-phi-two.vercel.app/user/signin",
+        "http://localhost:2022/user/signin",
         userData
       );
 
       setChecked(!checked);
-      console.log("Signin successfully", data);
-      navigate("/");
+      let saveToken = data?.data?.data?.token;
+      localStorage.setItem("token", saveToken);
 
       if (data) {
         setData({
@@ -57,13 +59,16 @@ function Sginin() {
           password: (data.password = ""),
         });
         toast.success("Signin successfully.");
+        navigate("/");
       }
     } catch (error) {
       console.log("something wrong!", error);
       toast.error("something wrong.");
     }
-  };
 
+    
+  };
+  
   return (
     <div className="container-fluid authentication-container">
       <div className="row flex-wrap authentication-row align-items-center">
@@ -99,19 +104,26 @@ function Sginin() {
 
               <div className="form-group checkbox-area d-flex justify-content-between align-items-center">
                 <Checkbox
-                    data="Remember me"
-                    checked={checked}
-                    onClick={() => setChecked(!checked)}
-                  />
+                  data="Remember me"
+                  checked={checked}
+                  onClick={() => setChecked(!checked)}
+                />
               </div>
               <Button
-                  signUpbtn={checked ? "btn-primary" : "btn-secondary"}
-                  disabled={checked === false}
-                  data="SignIn"
-                  onClick={handleSubmit}
-                />
+                signUpbtn={checked ? "btn-primary" : "btn-secondary"}
+                disabled={checked === false}
+                data={
+                    isLoading ? (
+                      
+                      "loading..."
+                    ) : (
+                      "SignIn"
+                    )
+                  }
+                onClick={handleSubmit}
+              />
             </div>
-            <p class="text-muted  my-3">
+            <p className="text-muted  my-3">
               – You don't have an account ? <Link to="/Signup">SignUp</Link>. –
             </p>
             <Socialicons />
