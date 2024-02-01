@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from "./shared/Footer";
@@ -18,6 +18,21 @@ export const getWeatherData = async (city) => {
   }
 };
 
+const getWeatherEmoji = (condition) => {
+  switch (condition) {
+    case "Clear":
+      return "☀️"; // sunny
+    case "Clouds":
+      return "☁️"; // cloudy
+    case "Rain":
+      return "🌧️"; // rainy
+    case "fog":
+      return "💨"; // fog
+    default:
+      return "❓";
+  }
+};
+
 function Header() {
   const [weatherdata, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
@@ -30,7 +45,7 @@ function Header() {
       fetchData();
     }
   };
-  
+
   const fetchData = async () => {
     if (city.trim() === "") {
       toast.error("Empty Input field");
@@ -42,7 +57,8 @@ function Header() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
       );
       setWeatherData(response.data);
-      toast.success("Got the data");
+      console.log(response.data);
+      toast.success("Get " + response.data.name +" weather ");
     } catch (error) {
       console.error("Error fetching weather data:", error);
       toast.error("please write correct city name.");
@@ -54,10 +70,7 @@ function Header() {
   token = localStorage.getItem("token");
   return (
     <>
-      <div>
-        <Toaster position="top-center" reverseOrder={false} />
-      </div>
-
+    
       <div className="header">
         <nav className="navbar navbar-expand-lg">
           <div className="container">
@@ -82,14 +95,22 @@ function Header() {
                     Weather
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/aboutus"
+                  >
+                    About
+                  </Link>
+                </li>
                 {token ? (
                   <li className="nav-item">
-                    <div className="nav-link logout" >
-                    <LogoutModal
-                      //onClick={handleLogout} 
-                    />
+                    <div className="nav-link logout">
+                      <LogoutModal
+                      //onClick={handleLogout}
+                      />
                     </div>
-                    
                   </li>
                 ) : (
                   <>
@@ -140,10 +161,13 @@ function Header() {
                 </div>
               </div>
             )}
+
             {weatherdata !== null ? (
               <div className="weather-condition">
                 <h2 className="location fw-bold">Live Weather Condition</h2>
-                <h3>{weatherdata.weather[0].main}</h3>
+                <h3 className="emoji" >{weatherdata.weather[0].main}{getWeatherEmoji (weatherdata.weather[0].main)}</h3>
+
+              
                 <div className="temperature">
                   <h1>{Math.round(weatherdata.main.temp - 273.15)}&deg;C</h1>
                 </div>

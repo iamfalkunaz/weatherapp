@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 import Image1 from "./undraw_remotely_2j6y.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./shared/Button";
@@ -28,10 +28,10 @@ function Sginin() {
       [e.target.name]: value,
     });
   };
- 
+
   const handleSubmit = async (e) => {
     if (data.email === "" || data.password === "") {
-      toast.error("All firlds are required");
+      toast.error("All fields are required");
       return;
     }
 
@@ -45,7 +45,6 @@ function Sginin() {
     try {
       const data = await axios.post(
         "https://server-phi-two.vercel.app/user/signin",
-        
         userData
       );
 
@@ -63,74 +62,91 @@ function Sginin() {
       }
     } catch (error) {
       console.log("something wrong!", error);
+      setIsLoading(false);
       toast.error("something wrong.");
     }
-
-    
   };
-  
+
   return (
-    <div className="container-fluid authentication-container">
-      <div className="row flex-wrap authentication-row align-items-center">
-        <div className="col-lg-6 col-sm-4 image-side">
-          <img src={Image1} alt="remotly work.svg img" />
-        </div>
-        <div className="col-lg-6 col-sm-8 form-side d-flex align-items-center">
-          <div className="login-form w-100">
-            <Heading data="Sign In" />
-            <p>
-              Please SignUp to see weather details.Access the latest forecasts.
-            </p>
+    <>
+     <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            success: {
+              duration: 2000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+            error: {
+              duration: 1000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+          }}
+        />
+      <div className="container-fluid authentication-container">
+        <div className="row flex-wrap authentication-row align-items-center">
+          <div className="col-lg-6 col-sm-4 image-side">
+            <img src={Image1} alt="remotly work.svg img" />
+          </div>
+          <div className="col-lg-6 col-sm-8 form-side d-flex align-items-center">
+            <div className="login-form w-100">
+              <Heading data="Sign In" />
+              <p>
+                Please SignUp to see weather details.Access the latest
+                forecasts.
+              </p>
 
-            <div>
-              <div className="input-area">
-                <div className="form-group">
-                  <InputFeilds
-                    name="email"
-                    onChange={handleChange}
-                    data="Email"
-                    value={data.email}
+              <div>
+                <div className="input-area">
+                  <div className="form-group">
+                    <InputFeilds
+                      name="email"
+                      onChange={handleChange}
+                      data="Email"
+                      value={data.email}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <InputFeilds
+                      name="password"
+                      onChange={handleChange}
+                      data="Password"
+                      value={data.password}
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group checkbox-area d-flex justify-content-between align-items-center">
+                  <Checkbox
+                    data="Remember me"
+                    checked={checked}
+                    onClick={() => setChecked(!checked)}
                   />
                 </div>
-                <div className="form-group">
-                  <InputFeilds
-                    name="password"
-                    onChange={handleChange}
-                    data="Password"
-                    value={data.password}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group checkbox-area d-flex justify-content-between align-items-center">
-                <Checkbox
-                  data="Remember me"
-                  checked={checked}
-                  onClick={() => setChecked(!checked)}
+                <Button
+                  signUpbtn={checked ? "btn-primary" : "btn-secondary"}
+                  disabled={checked === false}
+                  data={isLoading ? "loading..." : "SignIn"}
+                  onClick={handleSubmit}
                 />
               </div>
-              <Button
-                signUpbtn={checked ? "btn-primary" : "btn-secondary"}
-                disabled={checked === false}
-                data={
-                    isLoading ? (
-                      
-                      "loading..."
-                    ) : (
-                      "SignIn"
-                    )
-                  }
-                onClick={handleSubmit}
-              />
+              <p className="text-muted  my-3">
+                – You don't have an account ? <Link to="/Signup">SignUp</Link>.
+                –
+              </p>
+              <Socialicons />
             </div>
-            <p className="text-muted  my-3">
-              – You don't have an account ? <Link to="/Signup">SignUp</Link>. –
-            </p>
-            <Socialicons />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

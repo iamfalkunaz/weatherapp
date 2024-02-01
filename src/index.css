@@ -82,15 +82,6 @@ p {
   font-size: 30px;
   color: white;
 }
-.icon {
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.icon:hover {
-  transition: opacity 0.3s, transform 0.3s;
-  transform: scale(0.5);
-  opacity: 0;
-}
 .header-section {
   text-align: center;
   padding-top: 40px;
@@ -125,7 +116,7 @@ input {
   font-weight: 400;
   line-height: 1.4;
 }
-.btn:hover {
+.btn:hover.header-buttons {
   background-color: rgb(48, 5, 65);
 }
 .center-div p {
@@ -194,7 +185,9 @@ input:focus {
 .custom-control-input {
   margin-right: 5px;
 }
-
+input[type="checkbox"] {
+  cursor: pointer;
+}
 .custom-control-label::before,
 .custom-control-label::after {
   top: 0.8rem;
@@ -205,6 +198,9 @@ input:focus {
   height: 3rem;
   display: block;
   width: 100%;
+}
+.emoji {
+  font-size: 50px;
 }
 .btn-secondary {
   background-color: #edf2f5 !important;
@@ -305,10 +301,134 @@ input:focus {
 .footer-social-icon .fa-facebook-f:hover {
   color: rgb(112, 109, 114);
 }
-.logout{
+.logout {
   color: white !important;
   font-weight: bold;
 }
+
+/* styling about us page */
+
+.about-us {
+  margin: 0;
+  padding-top: 40px;
+  color: #2e323c;
+  background: #f5f6fa;
+  position: relative;
+  height: 100vh;
+}
+.account-settings .user-profile {
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+  margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+  margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #9fa8b9;
+}
+.account-settings .about {
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+.account-settings .about h5 {
+  margin: 0 0 15px 0;
+  color: #007ae1;
+}
+.account-settings .about p {
+  font-size: 0.825rem;
+}
+.card {
+  background: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+/* styling page not found */
+
+#oopss {
+  background: linear-gradient(-45deg, #6aaebc, #9bc0d8);
+  position: fixed;
+  left: 0px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 1.5em;
+  z-index: 9999;
+}
+#oopss #error-text {
+  font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Shabnam', Tahoma, sans-serif;
+  color: #000;
+  direction: rtl;
+}
+#oopss #error-text img {
+  margin: 85px auto 20px;
+  height: 342px;
+}
+#oopss #error-text span {
+  position: relative;
+  font-size: 3.3em;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
+#oopss #error-text p.p-a {
+  font-size: 19px;
+  margin: 30px 0 15px 0;
+}
+#oopss #error-text p.p-b {
+  font-size: 15px;
+}
+#oopss #error-text .back {
+  background: #fff;
+  color: #000;
+  font-size: 30px;
+  text-decoration: none;
+  margin: 2em auto 0;
+  padding: .7em 2em;
+  border-radius: 500px;
+  box-shadow: 0 20px 70px 4px rgba(0, 0, 0, 0.1), inset 7px 33px 0 0px #73bbcd;
+  font-weight: 900;
+  transition: all 300ms ease;
+}
+#oopss #error-text .back:hover {
+  -webkit-transform: translateY(-13px);
+          transform: translateY(-13px);
+  box-shadow: 0 35px 90px 4px rgba(100, 50, 215, 0.3), inset 0px 0 0 3px #7cb4c3;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot");
+  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot?#iefix") format("embedded-opentype"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff") format("woff"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff2") format("woff2"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: Shabnam;
+  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot");
+  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot?#iefix") format("embedded-opentype"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff") format("woff"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff2") format("woff2"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.ttf") format("truetype");
+  font-weight: normal;
+}
+
 
 @media (max-width: 992px) {
   .image-side {

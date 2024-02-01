@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 import Image1 from "./undraw_remotely_2j6y.svg";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./shared/Button";
@@ -27,8 +27,8 @@ function Signup() {
       ...data,
       [e.target.name]: value,
     });
-    // if (e.target.value.length === 3) {
-    //} setError("");
+   // if (e.target.value.length === 3) {
+   //}   setError("");
   };
 
   const handleSubmit = async (e) => {
@@ -38,24 +38,23 @@ function Signup() {
     }
 
     e.preventDefault();
-    setIsLoading(true);
-
     const userData = {
       name: data.name,
       email: data.email,
       password: data.password,
     };
+    
 
     try {
       const data = await axios.post(
-        "https://server-phi-two.vercel.app/user/signup",
+       "https://server-phi-two.vercel.app/user/signup",
+      
         userData
       );
-
       setChecked(!checked);
       console.log("user created successfully", data);
       navigate("/signin");
-
+      
       if (data) {
         setData({
           name: (data.name = ""),
@@ -63,21 +62,43 @@ function Signup() {
           password: (data.password = ""),
         });
         toast.success("Signup successfully.");
+
       }
     } catch (error) {
-      console.log("something wrong!", error);
-      toast.error("something wrong.");
-    } finally {
-      setIsLoading(false);
+      if (error.response && error.response.status === 409) {
+   
+        toast.error("Email already exists. Please choose a different one.");
+      } else {
+        console.log("something wrong!", error);
+        toast.error("Something went wrong!");
+      }
     }
   };
+  
 
   return (
     <>
-      <div>
-        <Toaster position="top-center" reverseOrder={false} />
-      </div>
-
+       <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          toastOptions={{
+            success: {
+              duration: 2000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+            error: {
+              duration: 1000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+          }}
+        />
       <div className="container-fluid authentication-container">
         <div className="row flex-wrap authentication-row">
           <div className="col-lg-6 col-sm-4 image-side">
@@ -121,25 +142,19 @@ function Signup() {
                   </div>
                 </div>
 
-                <div className="form-group checkbox-area d-flex justify-content-between align-items-center">
+                <div className=" form-group checkbox-area d-flex justify-content-between align-items-center">
                   <Checkbox
                     data="Confirmed"
                     checked={checked}
                     onClick={() => setChecked(!checked)}
+                    
                   />
                 </div>
 
                 <Button
                   signUpbtn={checked ? "btn-primary" : "btn-secondary"}
-                  disabled={checked === false || isLoading}
-                  data={
-                    isLoading ? (
-                      
-                      "loading..."
-                    ) : (
-                      "Signup"
-                    )
-                  }
+                  disabled={checked === false}
+                  data={isLoading ? "loading..." : "SignUp"}
                   onClick={handleSubmit}
                 />
               </div>

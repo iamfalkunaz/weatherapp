@@ -23,13 +23,12 @@ function LogoutModal() {
       <li onClick={handleShow}>Logout</li>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header closeButton><b>Logout Confirmation</b></Modal.Header>
         <Modal.Body>Are you sure you want to logout? 
         <div className="d-flex justify-content-end">
-        <Button variant="success" onClick={handleLogout} style={{ marginRight: '10px' }}>
-            Yes
-          </Button>
-          <Button variant="dark" onClick={handleClose}>
+        <Button variant="outline-primary" onClick={handleLogout} style={{ marginRight: '10px'}}>Yes</Button>
+       
+          <Button variant="outline-dark" onClick={handleClose}>
             No
           </Button>
         </div>
