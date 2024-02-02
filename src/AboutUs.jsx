@@ -128,7 +128,7 @@ function AboutUs() {
             </div>
           </div>
         </div>
-        <Footer textColor="rgb(48, 5, 65)" />
+        
       </div>
       
     </>
