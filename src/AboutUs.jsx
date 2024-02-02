@@ -1,21 +1,23 @@
 import React from "react";
 import { useState } from "react";
 import InputFeilds from "./shared/InputFeilds";
+import Navbar from "./shared/Navbar";
 import Button from "react-bootstrap/Button";
-
-
+import Footer from "./shared/Footer";
 
 function AboutUs() {
-  const [activeTab, setActiveTab] = useState("");
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
+ 
+
   return (
     <>
       <div className="about-us">
+      
         <div className="container ">
           <div className="row gutters">
             <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -71,18 +73,26 @@ function AboutUs() {
                   </div>
                   <div className="row gutters">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h6 className="mt-3 mb-2 text-primary">Change Password</h6>
+                      <h6 className="mt-3 mb-2 text-primary">
+                        Change Password
+                      </h6>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label for="c-password">Password</label>
-                        <InputFeilds data="Enter Old Password" value={data.password} />
+                        <InputFeilds
+                          data="Enter Old Password"
+                          value={data.password}
+                        />
                       </div>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label for="n-password">New Password</label>
-                        <InputFeilds data="Enter new Password" value={data.newpassword} />
+                        <InputFeilds
+                          data="Enter new Password"
+                          value={data.newpassword}
+                        />
                       </div>
                     </div>
                   </div>
@@ -118,7 +128,9 @@ function AboutUs() {
             </div>
           </div>
         </div>
+        <Footer textColor="rgb(48, 5, 65)" />
       </div>
+      
     </>
   );
 }

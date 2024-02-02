@@ -72,7 +72,7 @@ function Header() {
     <>
     
       <div className="header">
-        <nav className="navbar navbar-expand-lg">
+      <nav className="navbar navbar-expand-lg">
           <div className="container">
             <a className="navbar-brand text-white" href="#">
               <i className="fa-solid fa-cloud-moon icon"></i>
@@ -130,7 +130,6 @@ function Header() {
             </div>
           </div>
         </nav>
-
         <section className="header-section text-white py-5">
           <div className="center-div">
             <h1 className="fw-bold main-heading ">Find Weather Forcast</h1>
@@ -180,7 +179,9 @@ function Header() {
             ) : null}
           </div>
         </section>
-        <Footer />
+        <Footer 
+          className ="social"
+        />
       </div>
     </>
   );

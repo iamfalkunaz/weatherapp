@@ -10,10 +10,7 @@ html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-.toast-header {
-  color: #fff;
-  background-color: rgb(134, 55, 177);
-}
+
 .header {
   background-image: url("./weatherbg.png");
   background-size: cover;
@@ -129,23 +126,29 @@ input {
 .authentication-container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
   align-items: center;
   justify-content: center;
 }
 .authentication-row {
   margin: 0;
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
+  align-items: center;
 }
-
-.image-side img {
+img{
   width: 100%;
   height: auto;
   max-height: 100%;
-  margin-top: 35px;
+}
+
+.image-side img {
+  padding: 10px 5px 10px 5px;
+  align-items: center ;
+  justify-content: center;
 }
 .form-side {
-  padding: 2rem;
+  padding: .5rem;
   display: flex;
   align-items: center;
 }
@@ -231,7 +234,7 @@ input[type="checkbox"] {
 .social-icons .fa-google {
   background-color: #db4437;
 }
-
+/* footer styling */
 .footer {
   position: absolute;
   bottom: 5px;
@@ -245,8 +248,8 @@ input[type="checkbox"] {
 }
 
 .footer-heading {
-  color: #ddd !important;
   margin: auto;
+  color: inherit;
 }
 
 .footer-content {
@@ -268,6 +271,7 @@ input[type="checkbox"] {
 .footer-heading p {
   margin-left: 10px;
   color: #ddd !important;
+  color: inherit;
 }
 .footer-icon,
 .footer-heading,
@@ -278,6 +282,7 @@ input[type="checkbox"] {
 .footer-icon {
   font-size: 30px;
   margin-right: 20px;
+  color: inherit;
 }
 .footer-social-icon a {
   display: inline-block;
@@ -287,30 +292,22 @@ input[type="checkbox"] {
   border-radius: 50%;
   text-align: center;
   margin-right: 0.5rem;
-  color: white;
+  color: inherit;
 }
 .footer-social-icon a:link {
   text-decoration: none;
 }
-.footer-social-icon .fa-twitter:hover {
-  color: rgb(112, 109, 114);
-}
-.footer-social-icon .fa-google:hover {
-  color: rgb(112, 109, 114);
-}
-.footer-social-icon .fa-facebook-f:hover {
+.footer-social-icon .fa-twitter:hover .fa-google:hover .fa-facebook-f:hover {
   color: rgb(112, 109, 114);
 }
 .logout {
   color: white !important;
   font-weight: bold;
 }
-
 /* styling about us page */
-
 .about-us {
   margin: 0;
-  padding-top: 40px;
+  padding-top: 35px;
   color: #2e323c;
   background: #f5f6fa;
   position: relative;
@@ -431,26 +428,46 @@ input[type="checkbox"] {
 
 
 @media (max-width: 992px) {
-  .image-side {
-    width: auto;
+  .authentication-container .authentication-row{
+    width: 100%;
+  }
+  .image-side img {
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
   .form-side {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .input-query{
+    margin: 0;
     padding: 0%;
   }
 }
 
-@media (max-width: 768px) {
-  .authentication-container {
+@media(max-width: 768px) {
+
+  .authentication-container .authentication-row{
     width: 100%;
+  }
+  .image-side img{
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
   .content {
     display: block;
     padding: 20px;
   }
   .form-side {
-    width: 100%;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    margin: 0;
+    padding: 0;
+  }
+  .input-query{
+    margin: 0;
+    padding: 0%;
   }
   .center-div {
     width: 100%;
