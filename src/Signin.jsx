@@ -44,7 +44,8 @@ function Sginin() {
 
     try {
       const data = await axios.post(
-        "https://server-phi-two.vercel.app/user/signin",
+        // "https://server-phi-two.vercel.app/user/signin",
+        "http://localhost:2022/user/signin",
         userData
       );
 
@@ -104,7 +105,7 @@ function Sginin() {
               </p>
 
               <div>
-                <div className="input-area">
+                <div className="input-area input-query">
                   <div className="form-group">
                     <InputFeilds
                       name="email"
