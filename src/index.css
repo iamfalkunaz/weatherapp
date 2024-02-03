@@ -136,13 +136,11 @@ input {
   max-width: 1200px;
   align-items: center;
 }
-img{
-  width: 100%;
-  height: auto;
-  max-height: 100%;
-}
+
 
 .image-side img {
+  width: 100%;
+  height: auto;
   padding: 10px 5px 10px 5px;
   align-items: center ;
   justify-content: center;
@@ -178,12 +176,13 @@ input:focus {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .form-control {
   background-color: #edf2f5 !important;
   border: none;
   height: 3rem;
+  padding: 0.5rem;
 }
 .custom-control-input {
   margin-right: 5px;
@@ -449,32 +448,53 @@ input[type="checkbox"] {
 
 @media(max-width: 768px) {
 
-  .authentication-container .authentication-row{
+  .navbar-toggler {
+    display: block; 
+  }
+
+  .navbar-collapse {
+    display: none; 
+  }
+
+  .navbar-nav {
+    flex-direction: column; 
+  }
+
+  .nav-item {
+    margin-right: 0 !important; 
+  }
+
+  .image-side img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .form-group {
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control {
+    padding: 0.3rem;
+  }
+
+  .btn {
     width: 100%;
   }
-  .image-side img{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  .content {
-    display: block;
-    padding: 20px;
+
+  p {
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
   .form-side {
-    margin: 0;
-    padding: 0;
+    padding: 1rem; 
   }
-  .input-query{
-    margin: 0;
-    padding: 0%;
-  }
-  .center-div {
-    width: 100%;
-  }
-  .input-group {
-    text-align: center !important;
-    padding-left: 15px;
-    padding-right: 15px;
+  .form-side input {
+    width: 100%; 
+    padding: 0.5rem; 
+  }  
+  .form-side img {
+    max-width: 80%; 
+    height: auto;
+    margin: 0 auto; 
   }
 }
