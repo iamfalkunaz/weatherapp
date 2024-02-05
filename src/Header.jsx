@@ -68,6 +68,7 @@ function Header() {
   };
 
   token = localStorage.getItem("token");
+ 
   return (
     <>
     
@@ -120,7 +121,7 @@ function Header() {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/Signup">
+                      <Link className="nav-link" to="/signup">
                         SignUp
                       </Link>
                     </li>

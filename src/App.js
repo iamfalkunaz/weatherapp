@@ -17,8 +17,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<ProtectedRoute Component={Header} />} />
         <Route path="/aboutus" element={<ProtectedRoute Component={AboutUs} />} />
-        <Route path="/Signin" element={<Signin />} />
-        <Route path="/Signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route  path="*" element= {<PagenotFound />}/>
         
   

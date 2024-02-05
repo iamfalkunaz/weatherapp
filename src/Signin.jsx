@@ -139,7 +139,7 @@ function Sginin() {
                 />
               </div>
               <p className="text-muted  my-3">
-                – You don't have an account ? <Link to="/Signup">SignUp</Link>.
+                – You don't have an account ? <Link to="/signup">SignUp</Link>.
                 –
               </p>
               <Socialicons />
