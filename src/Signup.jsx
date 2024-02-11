@@ -47,8 +47,8 @@ function Signup() {
 
     try {
       const data = await axios.post(
-        "https://server-phi-two.vercel.app/user/signup",
-       
+       // "https://server-phi-two.vercel.app/user/signup",
+        "http://localhost:2022/user/signup",
         userData
       );
       setChecked(!checked);
@@ -118,6 +118,7 @@ function Signup() {
                 <div className="input-area">
                   <div className="form-group  ">
                     <InputFeilds
+                      
                       name="name"
                       onChange={handleChange}
                       data="Name"

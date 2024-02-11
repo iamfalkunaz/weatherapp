@@ -38,7 +38,7 @@ function Navbar({ textColor }) {
                   <Link
                     className="nav-link active"
                     aria-current="page"
-                    to="/aboutus"
+                    to="/about"
                   >
                     About
                   </Link>

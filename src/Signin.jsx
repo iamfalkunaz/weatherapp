@@ -44,7 +44,8 @@ function Sginin() {
 
     try {
       const data = await axios.post(
-         "https://server-phi-two.vercel.app/user/signin",
+        // "https://server-phi-two.vercel.app/user/signin",
+        "http://localhost:2022/user/signin",
         userData
       );
 
@@ -115,6 +116,7 @@ function Sginin() {
                   </div>
                   <div className="form-group">
                     <InputFeilds
+                      type="text"
                       name="password"
                       onChange={handleChange}
                       data="Password"

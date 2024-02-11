@@ -1,25 +1,71 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 import InputFeilds from "./shared/InputFeilds";
+import Textarea from "./shared/Textarea";
 import Navbar from "./shared/Navbar";
 import Button from "react-bootstrap/Button";
 import Footer from "./shared/Footer";
 
 function AboutUs() {
+  const [isEditable, setIsEditable] = useState(false);
+  const [userId, setUserId] = useState("");
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
+    phone: "",
+    bio: "",
+    birthDate: "",
+    oldPassword: "",
+    newPassword: "",
   });
 
- 
 
+  useEffect(() => {
+    // Retrieve user ID from local storage
+    const savedUserId = localStorage.getItem("userId");
+    setUserId(savedUserId);
+  }, []);
+
+  const handleInputChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const toggleEditMode = () => {
+    setIsEditable(!isEditable);
+  };
+
+  const handleSave = async () => {
+    if (!userId) {
+      toast.error("User not identified");
+      return;
+    }
+
+    try {
+      const response = await axios.put(
+        `http://localhost:2022/user/about/${userId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      toast.success("Information updated successfully");
+      setIsEditable(false);
+    } catch (error) {
+      console.error("Error updating information:", error);
+      toast.error("Failed to update information");
+    }
+  };
   return (
     <>
       <div className="about-us">
-      
+        <Navbar />
         <div className="container ">
-          <div className="row gutters">
+          <div className="row gutters about-data">
             <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
               <div className="card h-100">
                 <div className="card-body">
@@ -50,24 +96,44 @@ function AboutUs() {
                 <div className="card-body">
                   <div className="row gutters">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h6 className="mb-2 text-primary">Personal Details</h6>
+                      <h6 className="mb-2 text-primary">
+                        Update your Personal Details
+                      </h6>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label for="Name"> Name</label>
-                        <InputFeilds data="Name" value={data.name} />
+                        <InputFeilds
+                          data="Name"
+                          name="name"
+                          value={data.name}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
+                        />
                       </div>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label for="email">Email</label>
-                        <InputFeilds data="Email" value={data.email} />
+                        <InputFeilds
+                          data="Email"
+                          name="email"
+                          value={data.email}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
+                        />
                       </div>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label for="phone">Phone</label>
-                        <InputFeilds data="Phone Number" value={data.phone} />
+                        <InputFeilds
+                          data="Phone"
+                          name="phone"
+                          value={data.phone}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
+                        />
                       </div>
                     </div>
                   </div>
@@ -79,10 +145,14 @@ function AboutUs() {
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
-                        <label for="c-password">Password</label>
+                        <label for="c-password">Old Password</label>
                         <InputFeilds
-                          data="Enter Old Password"
-                          value={data.password}
+                          data="Old Password"
+                          name="oldPassword"
+                          type="password"
+                          value={data.oldPassword}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
                         />
                       </div>
                     </div>
@@ -90,8 +160,12 @@ function AboutUs() {
                       <div className="form-group">
                         <label for="n-password">New Password</label>
                         <InputFeilds
-                          data="Enter new Password"
-                          value={data.newpassword}
+                          data="New Password"
+                          name="newPassword"
+                          type="password"
+                          value={data.newPassword}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
                         />
                       </div>
                     </div>
@@ -102,24 +176,37 @@ function AboutUs() {
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
-                        <label for="bio">Bio</label>
-                        <InputFeilds data="Bio" />
+                        <Textarea
+                          label="Bio"
+                          name="bio"
+                          value={data.bio}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
+                        />
                       </div>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label for="birth">Date-of-Birth</label>
-                        <InputFeilds data="birth date" />
+                        <InputFeilds
+                          data="Birth Date"
+                          name="birthDate"
+                          value={data.birthDate}
+                          onChange={handleInputChange}
+                          disabled={!isEditable}
+                        />
                       </div>
                     </div>
                   </div>
                   <div className="row gutters">
-                    <div
-                      className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  d-flex justify-content-end"
-                      style={{ marginRight: "40px" }}
-                    >
+                    <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  d-flex justify-content-end">
                       <div className="text-right">
-                        <Button variant="outline-secondary">Edit</Button>
+                        <Button
+                          variant="outline-secondary"
+                          onClick={isEditable ? handleSave : toggleEditMode}
+                        >
+                          {isEditable ? "Save" : "Edit"}
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -128,9 +215,8 @@ function AboutUs() {
             </div>
           </div>
         </div>
-        
+        <Footer />
       </div>
-      
     </>
   );
 }

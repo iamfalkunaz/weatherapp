@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Footer({ textColor }) {
+function Footer() {
+ 
  
   return (
     <div>
       <footer className="footer" >
-        <div className="footer-content" >
+        <div className="footer-content">
           <div className="footer-icon">
           <i class="fa-solid fa-temperature-half"></i>
          

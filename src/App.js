@@ -2,7 +2,7 @@ import React from "react";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import Header from "./Header";
-import AboutUs from "./AboutUs";
+import About from "./About";
 import ProtectedRoute from "./ProtectedRoute";
 import PagenotFound from "./PagenotFound";
 import { Routes, Route } from "react-router-dom";
@@ -16,11 +16,10 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={<ProtectedRoute Component={Header} />} />
-        <Route path="/aboutus" element={<ProtectedRoute Component={AboutUs} />} />
+        <Route path="/about" element={<ProtectedRoute Component={About} />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route  path="*" element= {<PagenotFound />}/>
-        
+        <Route  path="*" element= {<PagenotFound />}/>  
   
       </Routes>
       <Toaster/>
