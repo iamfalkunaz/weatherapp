@@ -304,13 +304,20 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 /* styling about us page */
+
 .about-us {
   margin: 0;
-  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: #2e323c;
-  background: #f5f6fa;
+  background: linear-gradient(-45deg, #4f1dc6,rgb(48, 5, 65));
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+}
+.container {
+  flex: 1;
+  padding-bottom: 60px; 
 }
 .account-settings .user-profile {
   margin: 0 0 1rem 0;
@@ -394,23 +401,6 @@ input[type="checkbox"] {
 #oopss #error-text p.p-b {
   font-size: 15px;
 }
-#oopss #error-text .back {
-  background: #fff;
-  color: #000;
-  font-size: 30px;
-  text-decoration: none;
-  margin: 2em auto 0;
-  padding: .7em 2em;
-  border-radius: 500px;
-  box-shadow: 0 20px 70px 4px rgba(0, 0, 0, 0.1), inset 7px 33px 0 0px #73bbcd;
-  font-weight: 900;
-  transition: all 300ms ease;
-}
-#oopss #error-text .back:hover {
-  -webkit-transform: translateY(-13px);
-          transform: translateY(-13px);
-  box-shadow: 0 35px 90px 4px rgba(100, 50, 215, 0.3), inset 0px 0 0 3px #7cb4c3;
-}
 
 @font-face {
   font-family: Shabnam;
@@ -448,50 +438,14 @@ input[type="checkbox"] {
 
 @media(max-width: 768px) {
 
-  .navbar-toggler {
-    display: block; 
-  }
-
-  .navbar-collapse {
-    display: none; 
-  }
-
-  .navbar-nav {
-    flex-direction: column; 
-  }
-
-  .nav-item {
-    margin-right: 0 !important; 
-  }
-
   .image-side img {
     max-width: 100%;
     height: auto;
   }
-
-  .form-group {
-    margin-bottom: 0.5rem;
-  }
-
-  .form-control {
-    padding: 0.3rem;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-  }
   .form-side {
     padding: 1rem; 
   }
-  .form-side input {
-    width: 100%; 
-    padding: 0.5rem; 
-  }  
+ 
   .form-side img {
     max-width: 80%; 
     height: auto;
