@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import InputFeilds from "./shared/InputFeilds";
 import Textarea from "./shared/Textarea";
 import Navbar from "./shared/Navbar";
@@ -22,12 +22,34 @@ function AboutUs() {
     newPassword: "",
   });
 
+  // State to keep a copy of the original data
+  const [originalData, setOriginalData] = useState({});
 
   useEffect(() => {
-    // Retrieve user ID from local storage
-    const savedUserId = localStorage.getItem("userId");
-    setUserId(savedUserId);
+    const storedUserId = localStorage.getItem("userId");
+    console.log("Stored User ID:", storedUserId); // Check what is being retrieved
+
+    setUserId(storedUserId);
+
+    if (storedUserId) {
+      fetchUserData(storedUserId);
+    } else {
+      // If no userID is found, handle appropriately
+      console.error("No user ID found in localStorage");
+      toast.error("User not identified");
+    }
   }, []);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await axios.get(`http://localhost:2022/user/about/${userId}`);
+      setData(response.data);
+      setOriginalData(response.data); // Set original data here
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      toast.error("Error fetching user data.");
+    }
+  };
 
   const handleInputChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -42,23 +64,28 @@ function AboutUs() {
       toast.error("User not identified");
       return;
     }
-
+  
+    const updateData = {
+      ...data,
+      userId,
+    };
+    console.log("userId:", userId);
+ 
+    
     try {
-      const response = await axios.put(
-        `http://localhost:2022/user/about/${userId}`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await axios.put(`http://localhost:2022/user/about/${userId}`, updateData);
       toast.success("Information updated successfully");
-      setIsEditable(false);
     } catch (error) {
-      console.error("Error updating information:", error);
-      toast.error("Failed to update information");
+      console.error("Error updating user information:", error);
+      toast.error("Error updating information.");
     }
+    console.log("Updating data:", updateData);
+  };
+
+  // Function to handle cancel action
+  const handleCancel = () => {
+    setData(originalData);
+    setIsEditable(false);
   };
   return (
     <>
@@ -149,7 +176,6 @@ function AboutUs() {
                         <InputFeilds
                           data="Old Password"
                           name="oldPassword"
-                          type="password"
                           value={data.oldPassword}
                           onChange={handleInputChange}
                           disabled={!isEditable}
@@ -162,7 +188,6 @@ function AboutUs() {
                         <InputFeilds
                           data="New Password"
                           name="newPassword"
-                          type="password"
                           value={data.newPassword}
                           onChange={handleInputChange}
                           disabled={!isEditable}
@@ -201,9 +226,18 @@ function AboutUs() {
                   <div className="row gutters">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  d-flex justify-content-end">
                       <div className="text-right">
+                        {isEditable && (
+                          <Button
+                            variant="outline-secondary"
+                            onClick={handleCancel}
+                          >
+                            Cancel
+                          </Button>
+                        )}
                         <Button
-                          variant="outline-secondary"
+                          variant="outline-primary"
                           onClick={isEditable ? handleSave : toggleEditMode}
+                          style={{ marginLeft: isEditable ? "10px" : "0" }}
                         >
                           {isEditable ? "Save" : "Edit"}
                         </Button>

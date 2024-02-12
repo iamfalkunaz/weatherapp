@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 function LogoutModal() {
@@ -18,6 +18,7 @@ function LogoutModal() {
     navigate("/signin");
    toast.success("Logout Successfully.");
   };
+  
   return (
     <>
       <li onClick={handleShow}>Logout</li>

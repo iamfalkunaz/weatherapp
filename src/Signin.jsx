@@ -10,7 +10,7 @@ import Checkbox from "./shared/Checkbox";
 import Socialicons from "./shared/Socialicons";
 import InputFeilds from "./shared/InputFeilds";
 
-function Sginin() {
+function Signin() {
   const [checked, setChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -45,13 +45,17 @@ function Sginin() {
     try {
       const data = await axios.post(
          "https://server-phi-two.vercel.app/user/signin",
-       // "http://localhost:2022/user/signin",
+        //"http://localhost:2022/user/signin",
         userData
       );
 
       setChecked(!checked);
+
       let saveToken = data?.data?.data?.token;
+      let saveUserId = data?.data?.data?.userId;
+      
       localStorage.setItem("token", saveToken);
+      localStorage.setItem("userId", saveUserId);
 
       if (data) {
         setData({
@@ -152,4 +156,4 @@ function Sginin() {
   );
 }
 
-export default Sginin;
+export default Signin;
