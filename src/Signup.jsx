@@ -48,7 +48,7 @@ function Signup() {
     try {
       const data = await axios.post(
        "https://server-phi-two.vercel.app/user/signup",
-       // "http://localhost:2022/user/signup",
+     //  "http://localhost:2022/user/signup",
         userData
       );
       setChecked(!checked);

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import LogoutModal from './LogoutModal';
+import Logout from './Logout';
 
 function Navbar({ textColor }) {
   const style = {
@@ -46,9 +46,7 @@ function Navbar({ textColor }) {
                 {token ? (
                   <li className="nav-item">
                     <div className="nav-link logout">
-                      <LogoutModal
-                      //onClick={handleLogout}
-                      />
+                      <Logout/>
                     </div>
                   </li>
                 ) : (

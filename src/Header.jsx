@@ -30,7 +30,7 @@ const getWeatherEmoji = (condition) => {
     case "Smog":
       return "😮‍💨"; //smog
     case "Smoke":
-      return "😮‍💨"; // smoke
+      return "😮"; // smoke
     default:
       return "❓";
   }
@@ -86,6 +86,8 @@ function Header() {
                 placeholder="Enter your city name"
                 disabled={isLoading} // Disable input when loading
               />
+            </div>
+            <div className="">
               <button
                 className="btn btn-outline-secondary header-buttons"
                 type="button"
