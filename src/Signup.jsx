@@ -38,6 +38,7 @@ function Signup() {
     }
 
     e.preventDefault();
+    setIsLoading(true);
     const userData = {
       name: data.name,
       email: data.email,
@@ -48,7 +49,7 @@ function Signup() {
     try {
       const data = await axios.post(
        "https://server-phi-two.vercel.app/user/signup",
-       //"http://localhost:2022/user/signup",
+      // "http://localhost:2022/user/signup",
         userData
       );
       setChecked(!checked);
@@ -75,7 +76,6 @@ function Signup() {
     }
   };
   
-
   return (
     <>
        <Toaster
