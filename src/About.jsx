@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import toast from "react-hot-toast";
 import InputFeilds from "./shared/InputFeilds";
@@ -21,13 +22,17 @@ function AboutUs() {
     oldPassword: "",
     newPassword: "",
   });
+  const [profilePic, setProfilePic] = useState(null); // State for profile picture
+  const [preview, setPreview] = useState(""); 
+  const navigate = useNavigate(); 
+
 
   // State to keep a copy of the original data
   const [originalData, setOriginalData] = useState({});
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    console.log("Stored User ID:", storedUserId); // Check what is being retrieved
+    console.log("Stored User ID:", storedUserId);
 
     setUserId(storedUserId);
 
@@ -39,15 +44,32 @@ function AboutUs() {
       toast.error("User not identified");
     }
   }, []);
-
+ 
   const fetchUserData = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:2022/user/about/${userId}`);
-      setData(response.data);
+      const response = await axios.get(
+        `http://localhost:2022/user/about/${userId}`
+      );
+      setData(response.data.data);
       setOriginalData(response.data); // Set original data here
     } catch (error) {
       console.error("Error fetching user data:", error);
       toast.error("Error fetching user data.");
+    }
+  };
+  const deleteUser = async () => {
+    // Confirm before deletion
+    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+      try {
+        await axios.delete(`http://localhost:2022/user/${userId}`);
+        toast.success("Account deleted successfully");
+        
+        localStorage.removeItem("userId"); // Remove the userId from localStorage
+        navigate('/signup'); // Navigate to the signup page
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        toast.error("Failed to delete account.");
+      }
     }
   };
 
@@ -64,28 +86,50 @@ function AboutUs() {
       toast.error("User not identified");
       return;
     }
-  
+    const { name, email, oldPassword, newPassword, phone, bio, birthDate } =
+      data;
     const updateData = {
-      ...data,
-      userId,
+      name,
+      email,
+      oldPassword,
+      newPassword,
+      phone,
+      bio,
+      birthDate,
     };
-    console.log("userId:", userId);
- 
-    
+
     try {
       await axios.put(`http://localhost:2022/user/about/${userId}`, updateData);
       toast.success("Information updated successfully");
+      console.log("Updating data:", updateData);
+
+      setOriginalData(data); 
+      setIsEditable(false);
     } catch (error) {
       console.error("Error updating user information:", error);
       toast.error("Error updating information.");
     }
-    console.log("Updating data:", updateData);
   };
 
   // Function to handle cancel action
   const handleCancel = () => {
     setData(originalData);
     setIsEditable(false);
+  };
+
+  // Function to handle profile picture change
+  const handleProfilePicChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setProfilePic(file);
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
   return (
     <>
@@ -103,16 +147,22 @@ function AboutUs() {
                           src="https://bootdey.com/img/Content/avatar/avatar7.png"
                           alt="Maxwell Admin"
                         />
+                         
+                      
                       </div>
-                      <h5 className="user-name">Yuki Hayashi</h5>
-                      <h6 className="user-email">yuki@Maxwell.com</h6>
+                      <h5 className="user-name">{data.name}</h5>
+                      <h6 className="user-email">{data.email}</h6>
                     </div>
-                    <div className="about">
+                    <div className="about" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
                       <h5>About</h5>
-                      <p>
-                        I'm Yuki. Full Stack Designer I enjoy creating
-                        user-centric, delightful and human experiences.
-                      </p>
+                      <p>{data.bio}</p>
+                      <Button
+                        variant="outline-danger"
+                        onClick={deleteUser} 
+                        style={{ alignSelf: 'center', margin: '20px 0' }}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </div>
                 </div>
