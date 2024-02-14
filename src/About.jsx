@@ -13,19 +13,16 @@ function AboutUs() {
   const [isEditable, setIsEditable] = useState(false);
   const [userId, setUserId] = useState("");
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-    bio: "",
-    birthDate: "",
-    oldPassword: "",
-    newPassword: "",
-  });
-  const [profilePic, setProfilePic] = useState(null); // State for profile picture
-  const [preview, setPreview] = useState(""); 
+		name: '',
+		email: '',
+		password: '',
+		phone: '',
+		bio: '',
+		birthDate: '',
+		oldPassword: '',
+		newPassword: '',
+	});
   const navigate = useNavigate(); 
-
 
   // State to keep a copy of the original data
   const [originalData, setOriginalData] = useState({});
@@ -48,7 +45,9 @@ function AboutUs() {
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(
-        `http://localhost:2022/user/about/${userId}`
+        //`http://localhost:2022/user/about/${userId}`,
+       `https://server-phi-two.vercel.app/user/about/${userId}`,
+       
       );
       setData(response.data.data);
       setOriginalData(response.data); // Set original data here
@@ -61,7 +60,7 @@ function AboutUs() {
     // Confirm before deletion
     if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       try {
-        await axios.delete(`http://localhost:2022/user/${userId}`);
+        await axios.delete(`https://server-phi-two.vercel.app/user/about/${userId}`);
         toast.success("Account deleted successfully");
         
         localStorage.removeItem("userId"); // Remove the userId from localStorage
@@ -99,7 +98,7 @@ function AboutUs() {
     };
 
     try {
-      await axios.put(`http://localhost:2022/user/about/${userId}`, updateData);
+      await axios.put(`https://server-phi-two.vercel.app/user/about/${userId}`, updateData);
       toast.success("Information updated successfully");
       console.log("Updating data:", updateData);
 
@@ -117,20 +116,7 @@ function AboutUs() {
     setIsEditable(false);
   };
 
-  // Function to handle profile picture change
-  const handleProfilePicChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      setProfilePic(file);
-
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+ 
   return (
     <>
       <div className="about-us">
@@ -147,8 +133,6 @@ function AboutUs() {
                           src="https://bootdey.com/img/Content/avatar/avatar7.png"
                           alt="Maxwell Admin"
                         />
-                         
-                      
                       </div>
                       <h5 className="user-name">{data.name}</h5>
                       <h6 className="user-email">{data.email}</h6>
