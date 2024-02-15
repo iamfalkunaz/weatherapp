@@ -144,7 +144,7 @@ function AboutUs() {
                       <Button
                         variant="outline-danger"
                         onClick={handleDeleteClick}
-                        style={{ alignSelf: "center", margin: "20px 0" }}
+                        style={{ alignSelf: "center", margin:"20px 0" }}
                       >
                         Delete Account
                       </Button>

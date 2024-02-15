@@ -12,7 +12,6 @@ function ConfirmationModal({ action, title, body, showModal, handleClose }) {
     action();
     handleClose();
   };
-
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
