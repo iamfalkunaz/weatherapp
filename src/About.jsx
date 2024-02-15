@@ -138,7 +138,7 @@ function AboutUs() {
                       <h5 className="user-name">{data.name}</h5>
                       <h6 className="user-email">{data.email}</h6>
                     </div>
-                    <div className="about" >
+                    <div className="about">
                       <h5>About</h5>
                       <p>{data.bio}</p>
                       <Button
