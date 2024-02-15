@@ -1,28 +1,30 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import InputFeilds from "./shared/InputFeilds";
 import Textarea from "./shared/Textarea";
 import Navbar from "./shared/Navbar";
+import ConfirmationModal from "./shared/ConfirmationModal";
 import Button from "react-bootstrap/Button";
 import Footer from "./shared/Footer";
 
 function AboutUs() {
   const [isEditable, setIsEditable] = useState(false);
+  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [userId, setUserId] = useState("");
   const [data, setData] = useState({
-		name: '',
-		email: '',
-		password: '',
-		phone: '',
-		bio: '',
-		birthDate: '',
-		oldPassword: '',
-		newPassword: '',
-	});
-  const navigate = useNavigate(); 
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    bio: "",
+    birthDate: "",
+    oldPassword: "",
+    newPassword: "",
+  });
+  const navigate = useNavigate();
 
   // State to keep a copy of the original data
   const [originalData, setOriginalData] = useState({});
@@ -41,33 +43,18 @@ function AboutUs() {
       toast.error("User not identified");
     }
   }, []);
- 
+
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(
-        //`http://localhost:2022/user/about/${userId}`,
-        `https://server-phi-two.vercel.app/user/about/${userId}`,
+       // `http://localhost:2022/user/about/${userId}`
+        `https://server-phi-two.vercel.app/user/about/${userId}`
       );
       setData(response.data.data);
-      setOriginalData(response.data); // Set original data here
+      setOriginalData(response.data.data); // Set original data here
     } catch (error) {
       console.error("Error fetching user data:", error);
       toast.error("Error fetching user data.");
-    }
-  };
-  const deleteUser = async () => {
-    // Confirm before deletion
-    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      try {
-        await axios.delete(`https://server-phi-two.vercel.app/user/about/${userId}`);
-        toast.success("Account deleted successfully");
-        
-        localStorage.removeItem("userId"); // Remove the userId from localStorage
-        navigate('/signup'); // Navigate to the signup page
-      } catch (error) {
-        console.error("Error deleting account:", error);
-        toast.error("Failed to delete account.");
-      }
     }
   };
 
@@ -101,7 +88,7 @@ function AboutUs() {
       toast.success("Information updated successfully");
       console.log("Updating data:", updateData);
 
-      setOriginalData(data); 
+      setOriginalData(data);
       setIsEditable(false);
     } catch (error) {
       console.error("Error updating user information:", error);
@@ -109,13 +96,28 @@ function AboutUs() {
     }
   };
 
+  const handleAccountDeletion = async () => {
+    try {
+        await axios.delete(`https://server-phi-two.vercel.app/user/${userId}`);
+        toast.success("Account deleted successfully");
+        localStorage.removeItem("userId"); // Remove the userId from localStorage
+        navigate("/signup"); // Navigate to the signup page
+    } catch (error) {
+        console.error("Error deleting account:", error);
+        toast.error("Failed to delete account.");
+    }
+};
+
   // Function to handle cancel action
   const handleCancel = () => {
     setData(originalData);
     setIsEditable(false);
   };
-
- 
+  const handleDeleteClick = () => {
+    console.log("Delete button clicked");
+    setShowDeleteAccountModal(true);
+  };
+  
   return (
     <>
       <div className="about-us">
@@ -136,16 +138,23 @@ function AboutUs() {
                       <h5 className="user-name">{data.name}</h5>
                       <h6 className="user-email">{data.email}</h6>
                     </div>
-                    <div className="about" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
+                    <div className="about">
                       <h5>About</h5>
                       <p>{data.bio}</p>
                       <Button
                         variant="outline-danger"
-                        onClick={deleteUser} 
-                        style={{ alignSelf: 'center', margin: '20px 0' }}
+                        onClick={handleDeleteClick}
+                        style={{ alignSelf: "center", margin: "20px 0" }}
                       >
-                        Delete
+                        Delete Account
                       </Button>
+                      <ConfirmationModal
+                        action={handleAccountDeletion}
+                        title="Delete Account Confirmation"
+                        body="Are you sure you want to delete your account? This action cannot be undone."
+                        showModal={showDeleteAccountModal}
+                        handleClose={() => setShowDeleteAccountModal(false)}
+                      />
                     </div>
                   </div>
                 </div>
