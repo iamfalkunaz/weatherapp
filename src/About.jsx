@@ -98,15 +98,15 @@ function AboutUs() {
 
   const handleAccountDeletion = async () => {
     try {
-        await axios.delete(`https://server-phi-two.vercel.app/user/${userId}`);
-        toast.success("Account deleted successfully");
-        localStorage.removeItem("userId"); // Remove the userId from localStorage
-        navigate("/signup"); // Navigate to the signup page
+      await axios.delete(`https://server-phi-two.vercel.app/user/${userId}`);
+      toast.success("Account deleted successfully");
+      localStorage.removeItem("userId"); // Remove the userId from localStorage
+      navigate("/signup"); 
     } catch (error) {
-        console.error("Error deleting account:", error);
-        toast.error("Failed to delete account.");
+      console.error("Error deleting account:", error);
+      toast.error("Failed to delete account.");
     }
-};
+  };
 
   // Function to handle cancel action
   const handleCancel = () => {
@@ -117,46 +117,43 @@ function AboutUs() {
     console.log("Delete button clicked");
     setShowDeleteAccountModal(true);
   };
-  
+
   return (
     <>
       <div className="about-us">
         <Navbar />
         <div className="container ">
           <div className="row gutters about-data">
-            <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 first-card">
               <div className="card h-100">
                 <div className="card-body">
                   <div className="account-settings">
                     <div className="user-profile">
-                      <div className="user-avatar">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                          alt="Maxwell Admin"
-                        />
-                      </div>
+                      
                       <h5 className="user-name">{data.name}</h5>
                       <h6 className="user-email">{data.email}</h6>
                     </div>
                     <div className="about">
                       <h5>About</h5>
                       <p>{data.bio}</p>
-                      <Button
-                        variant="outline-danger"
-                        onClick={handleDeleteClick}
-                        style={{ alignSelf: "center", margin: "20px 0" }}
-                      >
-                        Delete Account
-                      </Button>
-                      <ConfirmationModal
-                        action={handleAccountDeletion}
-                        title="Delete Account Confirmation"
-                        body="Are you sure you want to delete your account? This action cannot be undone."
-                        showModal={showDeleteAccountModal}
-                        handleClose={() => setShowDeleteAccountModal(false)}
-                      />
                     </div>
                   </div>
+                </div>
+                <div style={{ textAlign: "center", marginBottom: "0" }}>
+                  <Button
+                    variant="outline-danger"
+                    onClick={handleDeleteClick}
+                    style={{ alignSelf: "center", margin: "20px 0" }}
+                  >
+                    Delete Account
+                  </Button>
+                  <ConfirmationModal
+                    action={handleAccountDeletion}
+                    title="Delete Account Confirmation"
+                    body="Are you sure you want to delete your account? This action cannot be undone."
+                    showModal={showDeleteAccountModal}
+                    handleClose={() => setShowDeleteAccountModal(false)}
+                  />
                 </div>
               </div>
             </div>

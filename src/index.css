@@ -319,6 +319,7 @@ input[type="checkbox"] {
   flex: 1;
   padding-bottom: 60px; 
 }
+
 .account-settings .user-profile {
   margin: 0 0 1rem 0;
   padding-bottom: 1rem;
@@ -335,7 +336,7 @@ input[type="checkbox"] {
   border-radius: 100px;
 }
 .account-settings .user-profile h5.user-name {
-  margin: 0 0 0.5rem 0;
+  margin: 5rem 0 0.5rem 0;
 }
 .account-settings .user-profile h6.user-email {
   margin: 0;
@@ -436,19 +437,15 @@ input[type="checkbox"] {
   }
 }
 
-@media(max-width: 768px) {
-
-  .image-side img {
-    max-width: 100%;
-    height: auto;
+@media (max-width: 768px) {
+  .image-side {
+    display: none; /* Hide the image-side div */
   }
   .form-side {
+    width: 100%; /* Make form-side take full width */
     padding: 1rem; 
   }
- 
-  .form-side img {
-    max-width: 80%; 
-    height: auto;
-    margin: 0 auto; 
+  .first-card{
+    margin-bottom: 20px;
   }
 }

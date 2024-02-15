@@ -69,9 +69,11 @@ function Signup() {
       if (error.response && error.response.status === 409) {
    
         toast.error("Email already exists. Please choose a different one.");
+        setIsLoading(false);
       } else {
         console.log("something wrong!", error);
         toast.error("Something went wrong!");
+        setIsLoading(false);
       }
     }
   };
