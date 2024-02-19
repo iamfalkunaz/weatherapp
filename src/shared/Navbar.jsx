@@ -50,7 +50,7 @@ function Navbar({ textColor }) {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/about">
-                      About
+                      Account
                     </Link>
                   </li>
                   <li className="nav-item">

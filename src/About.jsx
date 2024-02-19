@@ -10,7 +10,7 @@ import ConfirmationModal from "./shared/ConfirmationModal";
 import Button from "react-bootstrap/Button";
 import Footer from "./shared/Footer";
 
-function AboutUs() {
+function About() {
   const [isEditable, setIsEditable] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [userId, setUserId] = useState("");
@@ -47,7 +47,7 @@ function AboutUs() {
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(
-       // `http://localhost:2022/user/about/${userId}`
+      // `http://localhost:2022/user/about/${userId}`
         `https://server-phi-two.vercel.app/user/about/${userId}`
       );
       setData(response.data.data);
@@ -129,7 +129,6 @@ function AboutUs() {
                 <div className="card-body">
                   <div className="account-settings">
                     <div className="user-profile">
-                      
                       <h5 className="user-name">{data.name}</h5>
                       <h6 className="user-email">{data.email}</h6>
                     </div>
@@ -294,4 +293,4 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default About;

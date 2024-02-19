@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import worldCities from "./data/world-city-name.json";
 import Navbar from "./shared/Navbar";
 import { useNavigate } from "react-router-dom";
 import Footer from "./shared/Footer";
@@ -29,8 +30,6 @@ const getWeatherEmoji = (condition) => {
       return "💨"; // fog
     case "Smog":
       return "😮‍💨"; //smog
-    case "Smoke":
-      return "😮"; // smoke
     default:
       return "❓";
   }
@@ -39,8 +38,11 @@ const getWeatherEmoji = (condition) => {
 function Header() {
   const [weatherdata, setWeatherData] = useState(null);
   const [city, setCity] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -68,6 +70,26 @@ function Header() {
       setIsLoading(false);
     }
   };
+  const handleInputChange = (e) => {
+    const userInput = e.target.value.trim();
+    setCity(userInput);
+  
+    // Only show suggestions if there is at least one character in the input
+    if (userInput.length > 0) {
+      const filteredSuggestions = worldCities
+        .filter((cityObj) =>
+          cityObj.name.toLowerCase().startsWith(userInput.toLowerCase())
+        )
+        .slice(0, 3); // Adjust this to show more or fewer suggestions
+      setSuggestions(filteredSuggestions);
+    } 
+  };
+  
+  const selectSuggestion = (cityName) => {
+    setCity(cityName);
+    setSuggestions([]);
+    // Fetch the weather data or handle the selection
+  };
 
   return (
     <>
@@ -76,16 +98,22 @@ function Header() {
         <section className="header-section text-white py-5">
           <div className="center-div">
             <h1 className="fw-bold main-heading ">Find Weather Forcast</h1>
-            <div className="input-group mb-3 ">
+            <div className="input-group mb-3">
               <input
+                style={{borderRadius:"5px"}}
                 type="text"
                 value={city}
-                onChange={(e) => setCity(e.target.value)}
-                onKeyPress={handleKeyPress} // Added event handler for Enter key
-                className="form-control inputstyle"
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                className="form-control"
                 placeholder="Enter your city name"
-                disabled={isLoading} // Disable input when loading
+                list="city-suggestions"
               />
+              <datalist id="city-suggestions">
+                {suggestions.map((suggestion, index) => (
+                  <option key={index} value={suggestion.name} />
+                ))}
+              </datalist>
             </div>
             <div className="">
               <button
