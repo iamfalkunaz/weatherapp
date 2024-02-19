@@ -10,7 +10,7 @@ import ConfirmationModal from "./shared/ConfirmationModal";
 import Button from "react-bootstrap/Button";
 import Footer from "./shared/Footer";
 
-function Profile() {
+function About() {
   const [isEditable, setIsEditable] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [userId, setUserId] = useState("");
@@ -293,4 +293,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default About;
