@@ -47,6 +47,7 @@ function About() {
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(
+      // `http://localhost:2022/user/about/${userId}`
         `https://server-phi-two.vercel.app/user/about/${userId}`
       );
       setData(response.data.data);
