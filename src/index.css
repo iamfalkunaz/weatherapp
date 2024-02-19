@@ -17,6 +17,7 @@ html {
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
 }
 a:hover {
   text-decoration: none;
@@ -91,17 +92,6 @@ p {
   justify-content: center;
   padding-left: 25%;
   padding-right: 25%;
-}
-.inputstyle {
-  border: 2px solid #ffffff;
-  border-right: none;
-  padding: 10px;
-  height: 40px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-input {
-  background-color: #f9f9f9 !important;
 }
 .header-buttons {
   border: 1px solid #fff !important;
@@ -433,7 +423,7 @@ input[type="checkbox"] {
   }
   .input-query{
     margin: 0;
-    padding: 0%;
+    padding: 0;
   }
 }
 
@@ -448,4 +438,5 @@ input[type="checkbox"] {
   .first-card{
     margin-bottom: 20px;
   }
+  
 }
