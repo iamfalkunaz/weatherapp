@@ -84,7 +84,7 @@ function About() {
     };
 
     try {
-      await axios.put(`https://server-phi-two.vercel.app/user/about/${userId}`, updateData);
+      await axios.put( `https://server-phi-two.vercel.app/user/about/${userId}`, updateData);
       toast.success("Information updated successfully");
       console.log("Updating data:", updateData);
 
@@ -98,7 +98,7 @@ function About() {
 
   const handleAccountDeletion = async () => {
     try {
-      await axios.delete(`https://server-phi-two.vercel.app/user/${userId}`);
+      await axios.delete( `https://server-phi-two.vercel.app/user/${userId}`);
       toast.success("Account deleted successfully");
       localStorage.removeItem("userId"); // Remove the userId from localStorage
       navigate("/signup"); 
