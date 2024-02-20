@@ -66,6 +66,7 @@ function Header() {
       toast.error("please write correct city name.");
     } finally {
       setIsLoading(false);
+      setSuggestions([]); 
     }
   };
   const handleInputChange = (e) => {
