@@ -92,6 +92,8 @@ p {
   justify-content: center;
   padding-left: 25%;
   padding-right: 25%;
+  padding-bottom: 5px;
+  position: relative;
 }
 .header-buttons {
   border: 1px solid #fff !important;
@@ -102,6 +104,7 @@ p {
   font: 1rem;
   font-weight: 400;
   line-height: 1.4;
+  border-radius: 0 5px 5px 0 !important;
 }
 .btn:hover.header-buttons {
   background-color: rgb(48, 5, 65);
@@ -110,6 +113,36 @@ p {
   font-size: 1.3rem;
   padding: 10px 0 20px 0;
   color: white;
+}
+.suggestions-list {
+  width: 42.5%; 
+  left: 25%; 
+  right: 0;
+  top: 100%;
+  font-weight: bold;
+  list-style-type: none;
+  position: absolute;
+  color: #372fde;
+  text-align: left;
+  background: #edf2f5;
+  border-radius: 5px !important;
+  overflow: hidden; 
+  max-height: 200px; 
+  overflow-y: auto;
+  z-index: 10; 
+}
+.suggestions-list li {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #edf2f5;
+}
+
+.suggestions-list li:last-child {
+  border-bottom: none;
+}
+
+.suggestions-list li:hover {
+  background-color: none;
 }
 
 /* Signin Signup styling start*/
@@ -126,17 +159,15 @@ p {
   max-width: 1200px;
   align-items: center;
 }
-
-
 .image-side img {
   width: 100%;
   height: auto;
   padding: 10px 5px 10px 5px;
-  align-items: center ;
+  align-items: center;
   justify-content: center;
 }
 .form-side {
-  padding: .5rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
 }
@@ -301,13 +332,13 @@ input[type="checkbox"] {
   flex-direction: column;
   justify-content: space-between;
   color: #2e323c;
-  background: linear-gradient(-45deg, #4f1dc6,rgb(48, 5, 65));
+  background: linear-gradient(-45deg, #4f1dc6, rgb(48, 5, 65));
   position: relative;
   min-height: 100vh;
 }
 .container {
   flex: 1;
-  padding-bottom: 60px; 
+  padding-bottom: 60px;
 }
 
 .account-settings .user-profile {
@@ -371,7 +402,7 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Shabnam', Tahoma, sans-serif;
+  font-family: "Shabnam", Tahoma, sans-serif;
   color: #000;
   direction: rtl;
 }
@@ -396,19 +427,32 @@ input[type="checkbox"] {
 @font-face {
   font-family: Shabnam;
   src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot");
-  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot?#iefix") format("embedded-opentype"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff") format("woff"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff2") format("woff2"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.ttf") format("truetype");
+  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff")
+      format("woff"),
+    url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff2")
+      format("woff2"),
+    url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.ttf")
+      format("truetype");
   font-weight: bold;
 }
 @font-face {
   font-family: Shabnam;
   src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot");
-  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot?#iefix") format("embedded-opentype"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff") format("woff"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff2") format("woff2"), url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.ttf") format("truetype");
+  src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff")
+      format("woff"),
+    url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff2")
+      format("woff2"),
+    url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.ttf")
+      format("truetype");
   font-weight: normal;
 }
 
-
 @media (max-width: 992px) {
-  .authentication-container .authentication-row{
+  .authentication-container .authentication-row {
     width: 100%;
   }
   .image-side img {
@@ -421,7 +465,7 @@ input[type="checkbox"] {
     margin: 0;
     padding: 0;
   }
-  .input-query{
+  .input-query {
     margin: 0;
     padding: 0;
   }
@@ -433,10 +477,28 @@ input[type="checkbox"] {
   }
   .form-side {
     width: 100%; /* Make form-side take full width */
-    padding: 1rem; 
+    padding: 1rem;
   }
-  .first-card{
+  .first-card {
     margin-bottom: 20px;
   }
-  
+  .suggestions-list{
+    width: 50%;
+    margin: auto;
+    padding: 0%;
+    align-items: center;
+  }
 }
+@media (max-width: 576px) { /* Adjust this media query as needed for your mobile breakpoint */
+  .input-group .form-control {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px !important; /* Adds space between the input field and the button */
+  }
+  
+  .input-group .header-buttons {
+    width: 100%;
+    border-radius: 5px !important;
+  }
+}
+

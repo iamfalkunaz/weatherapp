@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import worldCities from "./data/world-city-name.json";
@@ -42,8 +42,6 @@ function Header() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  
-
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       fetchData();
@@ -71,26 +69,29 @@ function Header() {
     }
   };
   const handleInputChange = (e) => {
-    const userInput = e.target.value.trim();
+    const userInput = e.target.value;
     setCity(userInput);
-  
-    // Only show suggestions if there is at least one character in the input
+
     if (userInput.length > 0) {
       const filteredSuggestions = worldCities
         .filter((cityObj) =>
           cityObj.name.toLowerCase().startsWith(userInput.toLowerCase())
         )
-        .slice(0, 3); // Adjust this to show more or fewer suggestions
+        .slice(0, 3); // Assuming you want to show 5 suggestions
       setSuggestions(filteredSuggestions);
-    } 
+    } else {
+      setSuggestions([]);
+    }
   };
-  
+
   const selectSuggestion = (cityName) => {
     setCity(cityName);
     setSuggestions([]);
-    // Fetch the weather data or handle the selection
+    fetchData(cityName);
   };
 
+ 
+  
   return (
     <>
       <div className="header">
@@ -98,25 +99,17 @@ function Header() {
         <section className="header-section text-white py-5">
           <div className="center-div">
             <h1 className="fw-bold main-heading ">Find Weather Forcast</h1>
-            <div className="input-group mb-3">
+            <div className="input-group mb-3 position-relative">
               <input
-                style={{borderRadius:"5px"}}
+                
                 type="text"
                 value={city}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 className="form-control"
                 placeholder="Enter your city name"
-                list="city-suggestions"
               />
-              <datalist id="city-suggestions">
-                {suggestions.map((suggestion, index) => (
-                  <option key={index} value={suggestion.name} />
-                ))}
-              </datalist>
-            </div>
-            <div className="">
-              <button
+               <button
                 className="btn btn-outline-secondary header-buttons"
                 type="button"
                 onClick={fetchData}
@@ -125,7 +118,20 @@ function Header() {
               >
                 Search
               </button>
+              {suggestions.length > 0 && (
+                <ul className="suggestions-list">
+                  {suggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      onClick={() => selectSuggestion(suggestion.name)}
+                    >
+                      {suggestion.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
+            
             {isLoading && (
               <div className="text-center">
                 <div className="spinner-border text-light" role="status">
