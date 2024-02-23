@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import worldCities from "./data/world-city-name.json";
 import Navbar from "./shared/Navbar";
+import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import Footer from "./shared/Footer";
 
@@ -21,15 +22,15 @@ export const getWeatherData = async (city) => {
 const getWeatherEmoji = (condition) => {
   switch (condition) {
     case "Clear":
-      return "☀️"; // sunny
+      return "☀️"; 
     case "Clouds":
-      return "☁️"; // cloudy
+      return "☁️"; 
     case "Rain":
-      return "🌧️"; // rainy
+      return "🌧️";
     case "fog":
-      return "💨"; // fog
+      return "💨"; 
     case "Smog":
-      return "😮‍💨"; //smog
+      return "😮‍💨";
     default:
       return "❓";
   }
@@ -41,6 +42,10 @@ function Header() {
   const [suggestions, setSuggestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const goToMoreWeather = () => {
+    navigate("/moreweather", { state: { cityName: city } });
+  };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -59,16 +64,16 @@ function Header() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}`
       );
       setWeatherData(response.data);
-      console.log(response.data);
       toast.success("Get " + response.data.name + " weather ");
     } catch (error) {
       console.error("Error fetching weather data:", error);
       toast.error("please write correct city name.");
     } finally {
       setIsLoading(false);
-      setSuggestions([]); 
+      setSuggestions([]);
     }
   };
+
   const handleInputChange = (e) => {
     const userInput = e.target.value;
     setCity(userInput);
@@ -78,7 +83,7 @@ function Header() {
         .filter((cityObj) =>
           cityObj.name.toLowerCase().startsWith(userInput.toLowerCase())
         )
-        .slice(0, 3); // Assuming you want to show 5 suggestions
+        .slice(0, 3);
       setSuggestions(filteredSuggestions);
     } else {
       setSuggestions([]);
@@ -90,35 +95,87 @@ function Header() {
     setSuggestions([]);
     fetchData(cityName);
   };
+  if ("geolocation" in navigator) {
+    // Geolocation is available
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        // Retrieve latitude and longitude
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
 
- 
-  
+        // Do something with latitude and longitude
+        console.log("Latitude:", latitude);
+        console.log("Longitude:", longitude);
+      },
+      function (error) {
+        console.error("Error getting geolocation:", error);
+      }
+    );
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+
+  const fetchLocationWeather = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          setIsLoading(true);
+          try {
+            const response = await axios.get(
+              `${url}lat=${lat}&lon=${lon}&appid=${apikey}`
+            );
+            setWeatherData(response.data);
+            toast.success("Weather data fetched for your location");
+          } catch (error) {
+            console.error("Error fetching weather data:", error);
+            toast.error("Error fetching weather data for your location.");
+          } finally {
+            setIsLoading(false);
+          }
+        },
+        () => {
+          toast.error("Location access denied.");
+        }
+      );
+    } else {
+      toast.error("Geolocation is not supported by this browser.");
+    }
+  };
+
   return (
     <>
       <div className="header">
         <Navbar />
         <section className="header-section text-white py-5">
           <div className="center-div">
-            <h1 className="fw-bold main-heading ">Find Weather Forcast</h1>
+            <h1 className="fw-bold main-heading">Find Weather Forecast</h1>
             <div className="input-group mb-3 position-relative">
               <input
-                
                 type="text"
                 value={city}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 className="form-control"
-                placeholder="Enter your city name"
+                placeholder="Enter your city name "
               />
-               <button
+              <i
+                className="fa-solid fa-location-dot location-icon"
+                onClick={fetchLocationWeather}
+              ></i>
+              
+              <button
+                style={{ marginLeft: "5px" }}
                 className="btn btn-outline-secondary header-buttons"
                 type="button"
                 onClick={fetchData}
                 id="button-addon2"
-                disabled={isLoading} // Disable button when loading
+                disabled={isLoading}
               >
                 Search
               </button>
+
               {suggestions.length > 0 && (
                 <ul className="suggestions-list">
                   {suggestions.map((suggestion, index) => (
@@ -132,7 +189,7 @@ function Header() {
                 </ul>
               )}
             </div>
-            
+
             {isLoading && (
               <div className="text-center">
                 <div className="spinner-border text-light" role="status">
@@ -159,6 +216,11 @@ function Header() {
                 </div>
               </div>
             ) : null}
+            {weatherdata !== null && (
+              <Button variant="outline-info" onClick={goToMoreWeather}>
+                Previous/Upcoming Weather
+              </Button>
+            )}
           </div>
         </section>
         <Footer className="social" />
@@ -166,4 +228,5 @@ function Header() {
     </>
   );
 }
+
 export default Header;

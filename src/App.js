@@ -3,6 +3,7 @@ import Signup from "./Signup";
 import Signin from "./Signin";
 import Header from "./Header";
 import About from "./About";
+import MoreWeather from "./MoreWeather";
 import ProtectedRoute from "./ProtectedRoute";
 import PagenotFound from "./PagenotFound";
 import { Routes, Route } from "react-router-dom";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<ProtectedRoute Component={About} />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/moreweather" element={<MoreWeather />} />
         <Route  path="*" element= {<PagenotFound />}/>  
   
       </Routes>
