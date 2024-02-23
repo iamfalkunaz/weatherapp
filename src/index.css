@@ -97,7 +97,6 @@ p {
 }
 .header-buttons {
   border: 1px solid #fff !important;
-  margin: 0 5px;
   padding: 12px 35px;
   outline: none;
   color: #fff;
@@ -144,7 +143,9 @@ p {
 .suggestions-list li:hover {
   background-color: none;
 }
-
+.daily-forecast{
+  max-height: 50px;
+}
 /* Signin Signup styling start*/
 .authentication-container {
   display: flex;
@@ -385,6 +386,40 @@ input[type="checkbox"] {
   margin-bottom: 1rem;
 }
 
+/* MoreWeather data*/
+.moreweather{
+  margin: 0;
+  background: linear-gradient(-45deg, #4f1dc6, rgb(48, 5, 65));
+  position: relative;
+  min-height: 100vh;
+}
+.weather-forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.weather-forecast-table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd; /* Adjust color as needed */
+}
+
+.weather-forecast-table img {
+  width: 50px; /* Adjust as necessary */
+  height: auto;
+}
+
+
+.location-icon {
+  position: absolute;
+  left: 64.5%; /* Adjust as needed */
+  top: 47%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #4f1dc6;
+  font-size: 20px;
+}
+
 /* styling page not found */
 
 #oopss {
@@ -501,4 +536,20 @@ input[type="checkbox"] {
     border-radius: 5px !important;
   }
 }
-
+/* Ensure table does not overflow the page width */
+@media (max-width: 768px) {
+  .weather-forecast-table {
+    width: 80%;
+    align-items: center;
+    margin-left: 50px;
+    
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .location-icon{
+    right: 5%;
+    color: white;
+    top: 25px;
+    font-size: 25px;
+  }
+}

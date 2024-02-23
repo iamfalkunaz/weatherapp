@@ -1,12 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import ConfirmationModal from "./ConfirmationModal";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ textColor }) {
-  const [showLogoutModal, setShowLogoutModal] = useState(false); // State to control modal visibility
+function Navbar({  textColor }) {
+  const [showLogoutModal, setShowLogoutModal] = React.useState(false);
   const style = {
     color: textColor,
   };
@@ -17,10 +16,11 @@ function Navbar({ textColor }) {
     localStorage.removeItem("token");
     token = "";
     navigate("/signin");
-   toast.success("Logout Successfully.");
+    toast.success("Logout Successfully.");
   };
-  
+
   token = localStorage.getItem("token");
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg" style={style}>
@@ -41,7 +41,7 @@ function Navbar({ textColor }) {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-            {token ? (
+              {token ? (
                 <>
                   <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/">
@@ -53,6 +53,7 @@ function Navbar({ textColor }) {
                       Account
                     </Link>
                   </li>
+                 
                   <li className="nav-item">
                     <Link className="nav-link" style={{ cursor: 'pointer' }} onClick={() => setShowLogoutModal(true)}>
                       Logout
@@ -65,6 +66,7 @@ function Navbar({ textColor }) {
                       handleClose={() => setShowLogoutModal(false)}
                     />
                   </li>
+                  
                 </>
               ) : (
                 <>
