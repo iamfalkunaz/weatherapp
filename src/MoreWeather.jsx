@@ -117,12 +117,6 @@ function MoreWeather() {
                 {weatherForecast.map((forecast, index) => (
                   <tr key={index}>
                     <td>{new Date(forecast.dt * 1000).toLocaleDateString()}</td>
-                    <td>
-                      <img
-                        src={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}
-                        alt={forecast.weather[0].main}
-                      />
-                    </td>
                     <td>{Math.round(forecast.main.temp - 273.15)}°C</td>
                     <td>{forecast.weather[0].main}</td>
                   </tr>
